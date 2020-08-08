@@ -15,7 +15,7 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: 'master']],
                         userRemoteConfigs: [[
-                        url: 'https://github.com/web3j/sample-project-maven.git',
+                        url: 'https://github.com/shred/shariff-backend-java.git',
                         credentialsId: '',
                         ]]
                         ])
@@ -53,7 +53,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/emreziplar/ExamCounter.git'
+                git 'https://github.com/shred/shariff-backend-java.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
