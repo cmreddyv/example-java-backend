@@ -15,7 +15,7 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: 'master']],
                         userRemoteConfigs: [[
-                        url: 'https://github.com/emreziplar/ExamCounter.git',
+                        url: 'https://github.com/web3j/sample-project-maven.git',
                         credentialsId: '',
                         ]]
                         ])
@@ -25,7 +25,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/cmreddyv/example-java-backend.git'
+                git 'https://github.com/web3j/sample-project-maven.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -50,18 +50,6 @@ pipeline {
               sh 'aws s3 cp target/*.jar s3://chandrajenkins'
           }
 }
-        stage('Test') {
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/emreziplar/ExamCounter.git'
-
-                // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-        }
         stage('Deploy') {
             steps {
                 // Get some code from a GitHub repository
