@@ -41,15 +41,11 @@ pipeline {
                 success {
                     junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
+                    sh 'for file in target/*.jar; do { aws s3 cp $file s3://chandrajenkins/; } done'
                 }
             
             }
         }
-        stage("publish to s3") {
-          steps{
-              sh 'for file in target/*.jar; do { aws s3 cp $file s3://chandrajenkins/; } done'
-          }
-}
         stage('Deploy') {
             steps {
                 // Get some code from a GitHub repository
