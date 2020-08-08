@@ -15,7 +15,7 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: 'master']],
                         userRemoteConfigs: [[
-                        url: 'https://github.com/cmreddyv/example-java-backend.git',
+                        url: 'https://github.com/couchbaselabs/restful-angularjs-java.git',
                         credentialsId: '',
                         ]]
                         ])
@@ -39,7 +39,7 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
+                    junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
                 }
             
