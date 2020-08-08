@@ -47,7 +47,7 @@ pipeline {
         }
         stage("publish to s3") {
           steps{
-              sh 'aws s3 cp target/*.jar s3://chandrajenkins/ --recursive'
+              sh 'for file in target/*.jar; do { aws s3 cp $file s3://chandrajenkins/; } done'
           }
 }
         stage('Deploy') {
